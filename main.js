@@ -8,10 +8,12 @@ const v1Routes = require('./src/api/v1/routes')
 const app = express();
 
 app.use(cors({
-    origin: 'http://localhost:3000',
-    methods: ["GET", "POST"],
-    allowedHeaders: ["Content-Type", "Authorization"],
-    credentials: true
+    origin: process.env.NODE_ENV === 'production'
+        ? 'https://front-end-one-green.vercel.app/'  // Update this
+        : 'http://localhost:3000',
+    credentials: true,
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    allowedHeaders: ["Content-Type", "Authorization"]
 }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));  // Parse URL-encoded bodies
@@ -22,7 +24,7 @@ app.get('/', (req, res) => {
     res.send("server is stated Hello from server")
 })
 
-const port = 8080;
+const port = process.env.PORT || 8080;
 
 
 const startServer = async () => {
