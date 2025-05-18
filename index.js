@@ -9,7 +9,7 @@ const app = express();
 
 app.use(cors({
     origin: process.env.NODE_ENV === 'production'
-        ? 'https://front-end-one-green.vercel.app/'  // Update this
+        ? 'https://front-end-one-green.vercel.app'  // Update this
         : 'http://localhost:3000',
     credentials: true,
     methods: ["GET", "POST", "PUT", "DELETE"],
