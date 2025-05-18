@@ -6,6 +6,7 @@ const getAllmenufactures = require('../controllers/getAllmenufacturesController'
 const signup = require('../controllers/singUpcontroller');
 const login = require('../controllers/loginController');
 const { submitInquiry } = require('../controllers/inquiryController');
+const logout = require('../controllers/logoutController');
 const router = express.Router();
 router.get('/health', (req, res) => {
     res.status(200).json({ status: 'UP', message: 'API v1 is running' });
@@ -19,4 +20,5 @@ router.get('/menufactures', getAllmenufactures)
 router.post('/signup', signup)
 router.post('/login', login)
 router.post('/inqury', submitInquiry)
+router.post('/logout', logout)
 module.exports = router;
