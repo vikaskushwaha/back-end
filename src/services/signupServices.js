@@ -48,17 +48,12 @@ const setTokenCookie = (res, token) => {
     res.cookie('token', token, {
         httpOnly: true,
         secure: false,
-        sameSite: 'strict',
+        sameSite: 'none',
         maxAge: 24 * 60 * 60 * 1000
     });
 };
 
-/**
- * Authenticate user with email and password
- * @param {string} email - User email
- * @param {string} password - User password 
- * @returns {Object} - Authentication result with user or error message
- */
+
 const authenticateUser = async (email, password) => {
     try {
         // Find user by email
