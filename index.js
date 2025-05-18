@@ -7,10 +7,22 @@ require('dotenv').config();
 const v1Routes = require('./src/api/v1/routes')
 const app = express();
 
+const allowedOrigins = [
+    'https://front-end-one-green.vercel.app',
+    'http://localhost:3000'
+];
+
 app.use(cors({
-    origin: process.env.NODE_ENV === 'production'
-        ? 'https://front-end-one-green.vercel.app'  // Update this
-        : 'http://localhost:3000',
+    origin: function (origin, callback) {
+        // Allow requests with no origin (like mobile apps, curl requests)
+        if (!origin) return callback(null, true);
+
+        if (allowedOrigins.indexOf(origin) !== -1) {
+            callback(null, true);
+        } else {
+            callback(new Error('Not allowed by CORS'));
+        }
+    },
     credentials: true,
     methods: ["GET", "POST", "PUT", "DELETE"],
     allowedHeaders: ["Content-Type", "Authorization"]
